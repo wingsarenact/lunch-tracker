@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lunchtime Hockey RSVP - Wings Arena</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <h1>🏒 Lunchtime Hockey Drop-In</h1>
+      <p class="subtitle">Wings Arena RSVP</p>
+    </header>
+
+    <!-- Profile Section -->
+    <section class="profile-section">
+      <h2>Your Profile</h2>
+      <div class="profile-form">
+        <input type="text" id="firstName" placeholder="First Name">
+        <input type="text" id="lastName" placeholder="Last Name">
+        <select id="position">
+          <option value="Skater">Skater</option>
+          <option value="Goalie">Goalie</option>
+        </select>
+        <button id="saveProfile" class="btn">Save Profile</button>
+      </div>
+    </section>
+
+    <!-- Events Section -->
+    <section class="events-section">
+      <div class="events-header">
+        <h2>Upcoming Sessions</h2>
+        <button id="refreshBtn" class="btn btn-small">Refresh</button>
+      </div>
+      <div id="eventsContainer"></div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
