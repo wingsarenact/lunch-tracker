@@ -32,7 +32,7 @@ body {
   line-height: 1.5;
 }
 
-/* ✅ Wider layout (less blank space on desktop) */
+/* Wider layout */
 .container {
   max-width: 1100px;
   margin: 0 auto;
@@ -40,10 +40,7 @@ body {
 }
 
 @media (min-width: 900px) {
-  .container {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
+  .container { padding-left: 10px; padding-right: 10px; }
 }
 
 /* Header */
@@ -86,14 +83,11 @@ header h1 {
   font-size: 0.98rem;
   color: var(--text);
 }
-
 .info-section .spacer { height: 10px; }
-
 .info-section .fine-print {
   color: rgba(30, 36, 48, 0.72);
   font-size: 0.9rem;
 }
-
 .info-section .note {
   margin-top: 10px;
   font-size: 0.95rem;
@@ -133,10 +127,8 @@ header h1 {
   transition: background 0.2s, transform 0.05s, box-shadow 0.2s;
   box-shadow: 0 10px 18px rgba(5, 52, 96, 0.22);
 }
-
 .btn:hover { background: var(--navy-dark); }
 .btn:active { transform: translateY(1px); }
-
 .btn-small { padding: 8px 14px; font-size: 0.85rem; }
 
 .btn-cancel {
@@ -144,6 +136,17 @@ header h1 {
   box-shadow: 0 10px 18px rgba(201, 1, 57, 0.20);
 }
 .btn-cancel:hover { background: #a1002d; }
+
+/* ✅ Outline button for "View Players" */
+.btn-outline {
+  background: transparent;
+  color: var(--navy);
+  border: 2px solid rgba(5, 52, 96, 0.35);
+  box-shadow: none;
+}
+.btn-outline:hover {
+  background: rgba(5, 52, 96, 0.08);
+}
 
 /* Events header row */
 .events-header {
@@ -156,7 +159,7 @@ header h1 {
 /* Event container grid */
 #eventsContainer { display: grid; gap: 12px; }
 
-/* Session cards (grey background) */
+/* Session cards */
 .event-card {
   background: var(--session-bg);
   border-radius: 14px;
@@ -168,33 +171,38 @@ header h1 {
 /* Session card text */
 .event-date {
   font-weight: 800;
-  color: var(--navy);       /* ✅ default (time stays navy) */
+  color: var(--navy);
   margin-bottom: 8px;
 }
-
-.event-date-text {
-  color: #d70438;           /* ✅ ONLY day/date is red */
-}
-
-.event-time-text {
-  color: var(--navy);       /* ✅ explicitly keep time navy */
-}
+.event-date-text { color: #d70438; }
+.event-time-text { color: var(--navy); }
 
 .event-counts {
   font-size: 0.95rem;
   margin-bottom: 12px;
   color: rgba(30, 36, 48, 0.88);
 }
-
 .event-counts span {
   font-weight: 900;
   color: var(--red);
 }
-
 .my-status {
   font-size: 0.85rem;
   color: rgba(30, 36, 48, 0.65);
   margin-bottom: 10px;
+}
+
+/* ✅ Action row (RSVP + View Players) */
+.event-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.event-actions .btn {
+  flex: 1;
+}
+.event-actions .btn-outline {
+  flex: 1;
 }
 
 /* Desktop: 2-column grid */
@@ -210,4 +218,124 @@ header h1 {
 /* Optional: 3 columns on wide screens */
 @media (min-width: 1050px) {
   #eventsContainer { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* -----------------------
+   ✅ MODAL STYLES
+------------------------ */
+
+body.modal-open {
+  overflow: hidden;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  z-index: 9999;
+}
+
+.modal-overlay.is-open {
+  display: flex;
+}
+
+.modal {
+  width: min(520px, 100%);
+  background: rgba(255,255,255,0.98);
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+  border: 1px solid rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 14px 10px;
+  background: rgba(5, 52, 96, 0.06);
+}
+
+.modal-title {
+  font-size: 1.05rem;
+  color: var(--navy);
+}
+
+.modal-close {
+  border: none;
+  background: transparent;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 8px 10px;
+  border-radius: 10px;
+}
+.modal-close:hover {
+  background: rgba(0,0,0,0.06);
+}
+
+.modal-subtitle {
+  padding: 10px 14px 0;
+  color: rgba(30, 36, 48, 0.75);
+  font-size: 0.95rem;
+}
+
+.modal-body {
+  padding: 12px 14px 8px;
+}
+
+.modal-loading,
+.modal-empty {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.05);
+  color: rgba(30, 36, 48, 0.75);
+  font-size: 0.95rem;
+}
+
+.attendees-list {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.attendee-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(233, 236, 239, 0.9);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+
+.attendee-name {
+  font-weight: 700;
+  color: rgba(30, 36, 48, 0.9);
+}
+
+.attendee-pill {
+  font-size: 0.85rem;
+  font-weight: 800;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(5, 52, 96, 0.10);
+  color: var(--navy);
+  border: 1px solid rgba(5, 52, 96, 0.18);
+}
+
+.pill-goalie {
+  background: rgba(201, 1, 57, 0.10);
+  color: #b1002f;
+  border: 1px solid rgba(201, 1, 57, 0.22);
+}
+
+.modal-footer {
+  padding: 12px 14px 14px;
+  display: flex;
+  justify-content: flex-end;
 }
