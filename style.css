@@ -54,6 +54,16 @@ header {
   box-shadow: var(--shadow);
 }
 
+/* ✅ NEW: Logo above header title */
+.header-logo {
+  display: block;
+  margin: 0px auto 0px;          /* spacing under logo */
+  width: min(70px, 30%);       /* responsive sizing */
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.30));
+}
+
 header h1 {
   color: #ffffff;
   font-size: 1.55rem;
