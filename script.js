@@ -4,6 +4,78 @@
 const API_BASE_URL =
   "https://script.google.com/macros/s/AKfycbxLJ6pHvuaLpE6qekMhS6m4wKLYzQEVTh70os1XTMwiLZqCF_J3EsPs247eVz-OZzQR/exec";
 
+// -----------------------
+// ✅ EMBED HELPERS (AUTO-HEIGHT + HIDE SCROLLBAR WHEN IFRAME-EMBEDDED)
+// -----------------------
+const EMBED_HEIGHT_MESSAGE_TYPE = "LUNCH_TRACKER_HEIGHT";
+
+(function markEmbedded() {
+  // Only apply these behaviors when the page is running inside an iframe.
+  if (window.self !== window.top) {
+    document.documentElement.classList.add("is-embedded");
+  }
+})();
+
+(function setupEmbedAutoHeight() {
+  if (window.self === window.top) return; // only needed when embedded
+
+  let lastHeight = 0;
+  let rafId = null;
+
+  function computeDocHeight() {
+    const doc = document.documentElement;
+    const body = document.body;
+
+    // robust height calc across browsers
+    return Math.max(
+      body.scrollHeight,
+      body.offsetHeight,
+      doc.clientHeight,
+      doc.scrollHeight,
+      doc.offsetHeight
+    );
+  }
+
+  function postHeightNow() {
+    rafId = null;
+
+    const height = computeDocHeight();
+    if (Math.abs(height - lastHeight) < 2) return; // ignore tiny changes
+
+    lastHeight = height;
+    window.parent?.postMessage(
+      { type: EMBED_HEIGHT_MESSAGE_TYPE, height },
+      "*"
+    );
+  }
+
+  function schedulePostHeight() {
+    if (rafId) return;
+    rafId = requestAnimationFrame(postHeightNow);
+  }
+
+  // expose for manual calls after dynamic DOM updates
+  window.__reportEmbedHeight = schedulePostHeight;
+
+  window.addEventListener("load", schedulePostHeight);
+  window.addEventListener("resize", schedulePostHeight);
+
+  // Watch for layout/content changes (events render, modal content load, etc.)
+  if ("ResizeObserver" in window) {
+    const ro = new ResizeObserver(schedulePostHeight);
+    ro.observe(document.documentElement);
+    ro.observe(document.body);
+  } else {
+    const mo = new MutationObserver(schedulePostHeight);
+    mo.observe(document.body, {
+      subtree: true,
+      childList: true,
+      attributes: true,
+      characterData: true,
+    });
+  }
+})();
+
 // DOM Elements
 const firstNameEl = document.getElementById("firstName");
 const lastNameEl = document.getElementById("lastName");
@@ -227,10 +299,12 @@ async function renderEvents() {
   if (EVENTS.length === 0) {
     eventsContainer.innerHTML =
       `<div class="event-card">No upcoming sessions right now.</div>`;
+    window.__reportEmbedHeight?.();
     return;
   }
 
   eventsContainer.innerHTML = `<div class="event-card">Loading sessions...</div>`;
+  window.__reportEmbedHeight?.();
 
   let summary;
   try {
@@ -238,6 +312,7 @@ async function renderEvents() {
   } catch (err) {
     eventsContainer.innerHTML =
       `<div class="event-card">Error loading counts: ${String(err)}</div>`;
+    window.__reportEmbedHeight?.();
     return;
   }
 
@@ -300,6 +375,9 @@ async function renderEvents() {
       }
     });
   });
+
+  // ✅ after dynamic render, report height
+  window.__reportEmbedHeight?.();
 }
 
 async function toggleRsvp(eventId) {
@@ -322,6 +400,7 @@ async function toggleRsvp(eventId) {
     alert(`RSVP update failed: ${String(err)}`);
   } finally {
     setAllEventButtonsEnabled(true);
+    window.__reportEmbedHeight?.();
   }
 }
 
@@ -341,6 +420,7 @@ function showModal() {
   attendeesModal.classList.add("is-open");
   attendeesModal.setAttribute("aria-hidden", "false");
   document.body.classList.add("modal-open");
+  window.__reportEmbedHeight?.();
 }
 
 function hideModal() {
@@ -353,12 +433,15 @@ function hideModal() {
     modalLastFocusedEl.focus();
   }
   modalLastFocusedEl = null;
+
+  window.__reportEmbedHeight?.();
 }
 
 function resetModalContent() {
   modalLoading.style.display = "block";
   modalEmpty.style.display = "none";
   attendeesList.innerHTML = "";
+  window.__reportEmbedHeight?.();
 }
 
 async function openAttendeesModal(eventId, subtitleText) {
@@ -375,6 +458,7 @@ async function openAttendeesModal(eventId, subtitleText) {
 
     if (!attendees.length) {
       modalEmpty.style.display = "block";
+      window.__reportEmbedHeight?.();
       return;
     }
 
@@ -393,10 +477,13 @@ async function openAttendeesModal(eventId, subtitleText) {
         `;
       })
       .join("");
+
+    window.__reportEmbedHeight?.();
   } catch (err) {
     modalLoading.style.display = "none";
     modalEmpty.style.display = "block";
     modalEmpty.textContent = `Could not load players: ${String(err)}`;
+    window.__reportEmbedHeight?.();
   }
 }
 
@@ -432,4 +519,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderEvents();
   saveProfileBtn.addEventListener("click", saveProfile);
   refreshBtn.addEventListener("click", renderEvents);
+
+  // initial height post (helps on fast loads)
+  window.__reportEmbedHeight?.();
 });
