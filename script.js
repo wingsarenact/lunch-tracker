@@ -107,7 +107,7 @@ function buildUrl(base, params) {
 }
 
 /**
- * Generates Tue/Thu sessions for Feb+Mar 2026.
+ * Generates Tue/Thu sessions for Feb+Mar 2026, plus specific April 2026 sessions.
  * IDs are YYYY-MM-DD (matches Sheets).
  */
 function generateSessions() {
@@ -122,18 +122,42 @@ function generateSessions() {
     const id = toYmd(d);
     const dateText = formatDowMonDay(d); // "Tue, Feb 3"
     const timeText = "11:30 AM – 1:00 PM";
-    sessions.push({ id, dateText, timeText });
+    const startTime = "11:30";
+    sessions.push({ id, dateText, timeText, startTime });
   }
+
+  // April 2026 sessions (mixed days and times)
+  const aprilDates = [
+    { date: new Date(2026, 3, 2),  timeText: "11:30 AM – 1:00 PM", startTime: "11:30" },
+    { date: new Date(2026, 3, 7),  timeText: "11:30 AM – 1:00 PM", startTime: "11:30" },
+    { date: new Date(2026, 3, 9),  timeText: "11:30 AM – 1:00 PM", startTime: "11:30" },
+    { date: new Date(2026, 3, 13), timeText: "7:30 AM – 8:30 AM",  startTime: "07:30" },
+    { date: new Date(2026, 3, 16), timeText: "11:30 AM – 1:00 PM", startTime: "11:30" },
+    { date: new Date(2026, 3, 20), timeText: "7:30 AM – 8:30 AM",  startTime: "07:30" },
+    { date: new Date(2026, 3, 23), timeText: "11:30 AM – 1:00 PM", startTime: "11:30" },
+    { date: new Date(2026, 3, 27), timeText: "7:30 AM – 8:30 AM",  startTime: "07:30" },
+    { date: new Date(2026, 3, 30), timeText: "11:30 AM – 1:00 PM", startTime: "11:30" },
+  ];
+
+  for (const s of aprilDates) {
+    sessions.push({
+      id: toYmd(s.date),
+      dateText: formatDowMonDay(s.date),
+      timeText: s.timeText,
+      startTime: s.startTime,
+    });
+  }
+
   return sessions;
 }
 
 /**
- * Remove sessions whose start time (11:30 AM) has passed.
+ * Remove sessions whose start time has passed.
  */
 function filterOutPastSessions(sessions) {
   const now = new Date();
   return sessions.filter((s) => {
-    const start = new Date(s.id + "T11:30:00");
+    const start = new Date(s.id + "T" + (s.startTime || "11:30") + ":00");
     return start.getTime() >= now.getTime();
   });
 }
