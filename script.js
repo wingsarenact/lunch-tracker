@@ -148,6 +148,27 @@ function generateSessions() {
     });
   }
 
+  // May 2026 sessions (mixed days and times)
+  const mayDates = [
+    { date: new Date(2026, 4, 4),  timeText: "7:30 AM – 8:30 AM",  startTime: "07:30" },
+    { date: new Date(2026, 4, 7),  timeText: "11:30 AM – 1:00 PM", startTime: "11:30" },
+    { date: new Date(2026, 4, 11), timeText: "7:30 AM – 8:30 AM",  startTime: "07:30" },
+    { date: new Date(2026, 4, 14), timeText: "11:30 AM – 1:00 PM", startTime: "11:30" },
+    { date: new Date(2026, 4, 18), timeText: "7:30 AM – 8:30 AM",  startTime: "07:30" },
+    { date: new Date(2026, 4, 21), timeText: "11:30 AM – 1:00 PM", startTime: "11:30" },
+    { date: new Date(2026, 4, 25), timeText: "7:30 AM – 8:30 AM",  startTime: "07:30" },
+    { date: new Date(2026, 4, 28), timeText: "11:30 AM – 1:00 PM", startTime: "11:30" },
+  ];
+
+  for (const s of mayDates) {
+    sessions.push({
+      id: toYmd(s.date),
+      dateText: formatDowMonDay(s.date),
+      timeText: s.timeText,
+      startTime: s.startTime,
+    });
+  }
+
   return sessions;
 }
 
