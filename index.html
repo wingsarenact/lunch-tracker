@@ -2,92 +2,288 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lunchtime Hockey RSVP - Wings Arena</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>
+    Adult Lunchtime Hockey RSVP - Wings Arena
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  />
 </head>
+
 <body>
   <div class="container">
     <!-- Header -->
     <header>
-      <!-- ✅ NEW: Logo above the header title -->
-      <img class="header-logo" src="logo.png" alt="Wings Arena Logo" />
+      <img
+        class="header-logo"
+        src="logo.png"
+        alt="Wings Arena Logo"
+      />
 
-      <!-- ✅ Removed 🏒 icon -->
-      <h1>Adult Drop-In Hockey</h1>
+      <h1>
+        Adult Lunchtime Hockey
+      </h1>
 
-      <p class="subtitle">Select Mondays, Tuesdays & Thursdays this Spring & Summer!</p>
+      <p class="subtitle">
+        Every Monday &amp; Friday,
+        11:45 AM – 1:15 PM •
+        Starting Sept 11th!
+      </p>
     </header>
 
     <!-- Info / Description Section -->
-    <section class="info-section" aria-label="Program information">
+    <section
+      class="info-section"
+      aria-label="Program information"
+    >
       <p>
-        Take a break from the workday and get a great skate in at Wings Arena with our
-        <strong>Adult Drop-In Hockey</strong>—a fast, fun midweek run designed for
-        adult players who just want to play, get a sweat in, and skate with a solid group.
-        Spots are limited and filled in order of registration, so lock yours in ahead of time
-        online (or sign up at the rink), grab your full gear, and join us on the ice.
+        Take a break from the workday and
+        get a great skate in at Wings Arena
+        with our
+        <strong>
+          Adult Lunchtime Hockey
+        </strong>
+        —co-ed hockey open to players 18
+        and up, with all skill levels
+        welcome in a fun environment.
+        Drop in or register in advance,
+        grab your full gear, and join us
+        on the ice.
       </p>
 
       <p class="spacer"></p>
 
       <p class="fine-print">
-        <em>All sessions have a limited number of openings &amp; these are filled based on the order of sign-up.
-        Once the limit is reached, no additional skaters will be allowed in the session.
-        You can sign-up online or at Wings Arena before the session. Online registration is encouraged but not required.</em>
+        <em>
+          All sessions have a limited
+          number of openings &amp; these
+          are filled based on the order of
+          sign-up. Once the limit is
+          reached, no additional skaters
+          will be allowed in the session.
+          You can register online in
+          advance or at Wings Arena before
+          the session.
+        </em>
       </p>
 
       <p class="note">
-        <strong>Note:</strong> Full equipment is required for all skaters.
+        <strong>Note:</strong>
+        Full equipment is required.
       </p>
+    </section>
+
+    <!-- Registration Section -->
+    <section
+      class="registration-section"
+      aria-label="Registration and pricing"
+    >
+      <h2>
+        Pricing &amp; Registration
+      </h2>
+
+      <hr class="section-divider" />
+
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-price">
+            $25/session
+          </div>
+        </div>
+      </div>
+
+      <div class="registration-cta">
+        <div class="qr-frame">
+          <img
+            src="qr-code.png"
+            alt="Scan to register for Adult Lunchtime Hockey"
+          />
+        </div>
+
+        <a
+          class="btn-register"
+          href="https://tms.ezfacility.com/OnlineRegistrations/Register.aspx?CompanyID=8390&GroupID=4104303"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Register Now
+        </a>
+
+        <p class="registration-note">
+          Registration is not required,
+          skaters can drop-in and pay at
+          the front desk.
+        </p>
+      </div>
     </section>
 
     <!-- Profile Section -->
     <section class="profile-section">
-      <h2>Your Profile</h2>
+      <h2>
+        Your Profile
+      </h2>
+
       <div class="profile-form">
-        <input type="text" id="firstName" placeholder="First Name" />
-        <input type="text" id="lastName" placeholder="Last Name" />
+        <input
+          type="text"
+          id="firstName"
+          placeholder="First Name"
+        />
+
+        <input
+          type="text"
+          id="lastName"
+          placeholder="Last Name"
+        />
+
         <select id="position">
-          <option value="Skater">Skater</option>
-          <option value="Goalie">Goalie</option>
+          <option value="Skater">
+            Skater
+          </option>
+
+          <option value="Goalie">
+            Goalie
+          </option>
         </select>
-        <button id="saveProfile" class="btn">Save Profile</button>
+
+        <button
+          id="saveProfile"
+          class="btn"
+          type="button"
+        >
+          Save Profile
+        </button>
       </div>
+
+      <p class="profile-note">
+        Your personal info is not used,
+        saved, or sold by Wings Arena.
+        The RSVP feature simply allows
+        others to see how many
+        skaters plan to attend a given
+        session. Your name will be
+        abbreviated when displayed under
+        the View Players menu. RSVP is
+        encouraged, but not required to
+        attend.
+      </p>
     </section>
 
     <!-- Events Section -->
     <section class="events-section">
       <div class="events-header">
-        <h2>Upcoming Sessions</h2>
-        <button id="refreshBtn" class="btn btn-small">Refresh</button>
+        <h2>
+          Upcoming Sessions
+        </h2>
+
+        <button
+          id="refreshBtn"
+          class="btn btn-small"
+          type="button"
+        >
+          Refresh
+        </button>
       </div>
+
       <div id="eventsContainer"></div>
     </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <p>
+        Questions? Email
+        <a href="mailto:jwanderlingh@wingsarena.com">
+          jwanderlingh@wingsarena.com
+        </a>
+      </p>
+
+      <p>
+        Wings Arena •
+        5 Barry Place, Stamford, CT 06902 •
+        203.357.1055 •
+        <a
+          href="https://wingsarena.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          wingsarena.com
+        </a>
+      </p>
+    </footer>
   </div>
 
-  <!-- ✅ Modal (hidden by default) -->
-  <div id="attendeesModal" class="modal-overlay" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <!-- Modal -->
+  <div
+    id="attendeesModal"
+    class="modal-overlay"
+    aria-hidden="true"
+  >
+    <div
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modalTitle"
+    >
       <div class="modal-header">
-        <h3 id="modalTitle" class="modal-title">Session Attendees</h3>
-        <button id="modalCloseBtn" class="modal-close" type="button" aria-label="Close">
+        <h3
+          id="modalTitle"
+          class="modal-title"
+        >
+          Session Attendees
+        </h3>
+
+        <button
+          id="modalCloseBtn"
+          class="modal-close"
+          type="button"
+          aria-label="Close"
+        >
           ✕
         </button>
       </div>
 
-      <div class="modal-subtitle" id="modalSubtitle"></div>
+      <div
+        class="modal-subtitle"
+        id="modalSubtitle"
+      ></div>
 
       <div class="modal-body">
-        <div id="modalLoading" class="modal-loading">Loading players…</div>
-        <div id="modalEmpty" class="modal-empty" style="display:none;">
+        <div
+          id="modalLoading"
+          class="modal-loading"
+        >
+          Loading players…
+        </div>
+
+        <div
+          id="modalEmpty"
+          class="modal-empty"
+          style="display: none;"
+        >
           No RSVPs yet for this session.
         </div>
-        <ul id="attendeesList" class="attendees-list"></ul>
+
+        <ul
+          id="attendeesList"
+          class="attendees-list"
+        ></ul>
       </div>
 
       <div class="modal-footer">
-        <button id="modalCloseBtn2" class="btn btn-small" type="button">Close</button>
+        <button
+          id="modalCloseBtn2"
+          class="btn btn-small"
+          type="button"
+        >
+          Close
+        </button>
       </div>
     </div>
   </div>
