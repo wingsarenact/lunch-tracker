@@ -328,8 +328,11 @@ function buildUrl(
 
 /**
  * Generates Mon/Fri sessions
- * from Sept 11, 2026 through
- * Fri, Nov 13, 2026.
+ * from Fri, Nov 20, 2026 through
+ * the end of Feb 2027.
+ *
+ * Mondays: 11:45 AM – 1:15 PM
+ * Fridays: 11:40 AM – 1:10 PM
  *
  * IDs are YYYY-MM-DD.
  */
@@ -337,15 +340,15 @@ function generateSessions() {
   const start =
     new Date(
       2026,
-      8,
-      11
+      10,
+      20
     );
 
   const end =
     new Date(
-      2026,
-      10,
-      13
+      2027,
+      1,
+      28
     );
 
   const sessions = [];
@@ -374,11 +377,18 @@ function generateSessions() {
     const dateText =
       formatDowMonDay(d);
 
+    const isFriday =
+      day === 5;
+
     const timeText =
-      "11:45 AM – 1:15 PM";
+      isFriday
+        ? "11:40 AM – 1:10 PM"
+        : "11:45 AM – 1:15 PM";
 
     const startTime =
-      "11:45";
+      isFriday
+        ? "11:40"
+        : "11:45";
 
     sessions.push({
       id,

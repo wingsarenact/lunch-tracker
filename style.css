@@ -297,24 +297,35 @@ header h1 {
     var(--navy);
 }
 
-/* Registration section */
+/* Pricing card */
 
-.registration-section {
-  padding:
-    26px
-    16px
-    22px;
+.pricing-section {
+  display:
+    flex;
+
+  justify-content:
+    center;
 
   margin:
     0
     0
     18px;
+}
+
+.pricing-card {
+  width:
+    100%;
+
+  max-width:
+    560px;
+
+  padding:
+    22px
+    20px
+    18px;
 
   text-align:
     center;
-
-  border-radius:
-    14px;
 
   background:
     rgba(
@@ -324,143 +335,64 @@ header h1 {
       0.08
     );
 
+  border-radius:
+    16px;
+
   border:
     1px solid
     var(--border);
+
+  border-top:
+    5px solid
+    var(--red);
 
   box-shadow:
     var(--shadow);
 }
 
-.registration-section h2 {
-  color:
-    #ffffff;
-
-  font-size:
-    1.5rem;
-
-  font-weight:
-    700;
-}
-
-.section-divider {
-  border:
-    none;
-
-  border-top:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.25
-    );
-
-  margin:
-    16px
-    auto
-    18px;
-
-  max-width:
-    100%;
-}
-
-.pricing-grid {
-  display:
-    flex;
-
-  justify-content:
-    center;
-}
-
-.pricing-card {
-  padding:
-    6px 0;
-}
-
-.pricing-price {
-  color:
-    #d61f3e;
-
-  font-weight:
-    800;
-
-  font-size:
-    2.2rem;
-
-  line-height:
-    1.1;
-}
-
-.registration-cta {
-  display:
-    flex;
-
-  flex-direction:
-    column;
-
-  align-items:
-    center;
-
-  gap:
-    16px;
-
-  margin-top:
-    24px;
-}
-
-.qr-frame {
-  width:
-    140px;
-
-  height:
-    140px;
-
-  background:
-    #ffffff;
-
-  border-radius:
-    14px;
-
-  padding:
-    10px;
-
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  justify-content:
-    center;
-
-  box-shadow:
-    0 10px 20px
-    rgba(
-      0,
-      0,
-      0,
-      0.25
-    );
-}
-
-.qr-frame img {
-  width:
-    100%;
-
-  height:
-    100%;
-
-  object-fit:
-    contain;
-}
-
-.btn-register {
+.pricing-label {
   display:
     inline-block;
 
+  margin:
+    0
+    0
+    10px;
+
+  padding:
+    4px
+    12px;
+
+  font-size:
+    0.75rem;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    1.2px;
+
+  text-transform:
+    uppercase;
+
+  color:
+    #ffffff;
+
   background:
-    #2f4a54;
+    rgba(
+      255,
+      255,
+      255,
+      0.14
+    );
+
+  border-radius:
+    999px;
+}
+
+.pricing-price {
+  margin:
+    0;
 
   color:
     #ffffff;
@@ -469,16 +401,35 @@ header h1 {
     800;
 
   font-size:
-    1rem;
+    2.8rem;
 
-  padding:
-    14px
-    34px;
+  line-height:
+    1;
+}
 
-  border-radius:
-    10px;
+.pricing-unit {
+  margin:
+    4px
+    0
+    0;
 
-  border:
+  color:
+    #ffffff;
+
+  font-size:
+    0.9rem;
+}
+
+.pricing-note {
+  margin:
+    16px
+    0
+    0;
+
+  padding-top:
+    14px;
+
+  border-top:
     1px solid
     rgba(
       255,
@@ -487,50 +438,11 @@ header h1 {
       0.18
     );
 
-  text-decoration:
-    none;
-
-  box-shadow:
-    0 10px 20px
-    rgba(
-      0,
-      0,
-      0,
-      0.25
-    );
-
-  transition:
-    background 0.2s,
-    transform 0.05s;
-}
-
-.btn-register:hover {
-  background:
-    #3a5c68;
-}
-
-.btn-register:active {
-  transform:
-    translateY(1px);
-}
-
-.registration-note {
   color:
-    rgba(
-      255,
-      255,
-      255,
-      0.7
-    );
+    #ffffff;
 
   font-size:
     0.85rem;
-
-  max-width:
-    100%;
-
-  text-align:
-    center;
 }
 
 /* Profile Form */
