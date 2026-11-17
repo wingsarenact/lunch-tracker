@@ -326,6 +326,13 @@ function buildUrl(
   return u.toString();
 }
 
+// No session on these dates (YYYY-MM-DD).
+const SKIPPED_DATES =
+  new Set([
+    "2026-11-27", // Day after Thanksgiving
+    "2026-12-25", // Christmas
+  ]);
+
 /**
  * Generates Mon/Fri sessions
  * from Fri, Nov 20, 2026 through
@@ -373,6 +380,12 @@ function generateSessions() {
 
     const id =
       toYmd(d);
+
+    if (
+      SKIPPED_DATES.has(id)
+    ) {
+      continue;
+    }
 
     const dateText =
       formatDowMonDay(d);
